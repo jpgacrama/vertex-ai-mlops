@@ -1,8 +1,11 @@
 # 03 - BigQuery ML (BQML)
 Machine Learning with SQL using [BigQuery ML (BQML)](https://cloud.google.com/bigquery-ml/docs/introduction).
 
-## This series of notebooks will introduce BigQuery ML (BQML) with a focus on classification methods.
+**Prerequisites**
+- [00 - Setup.ipynb](../00%20-%20Setup/00%20-%20Environment%20Setup.ipynb)
+- [01 - BigQuery - Table Data Source.ipynb](../01%20-%20Data%20Sources/01%20-%20BigQuery%20-%20Table%20Data%20Source.ipynb)
 
+## This series of notebooks will introduce BigQuery ML (BQML) with a focus on classification methods.
 - [03 - Introduction to BigQuery ML (BQML)](03%20-%20Introduction%20to%20BigQuery%20ML%20(BQML).ipynb)
 - [03a - BQML Logistic Regression](03a%20-%20BQML%20Logistic%20Regression.ipynb)
 - [03b - BQML Boosted Trees](03b%20-%20BQML%20Boosted%20Trees.ipynb)
@@ -28,3 +31,17 @@ Machine Learning with SQL using [BigQuery ML (BQML)](https://cloud.google.com/bi
     - [1 - BigQuery Time Series Forecasting Data Review and Preparation](../Applied%20Forecasting/1%20-%20BigQuery%20Time%20Series%20Forecasting%20Data%20Review%20and%20Preparation.ipynb)
     - [2 - BQML Univariate Forecasting with ARIMA+](../Applied%20Forecasting/2%20-%20BQML%20Univariate%20Forecasting%20with%20ARIMA+.ipynb)
     - [8 - Vertex AI Pipelines - Forecasting Tournament - BQML + AutoML + Prophet](../Applied%20Forecasting/8%20-%20Vertex%20AI%20Pipelines%20-%20Forecasting%20Tournament%20-%20BQML%20+%20AutoML%20+%20Prophet.ipynb)
+
+---
+ToDo:
+- [X] add prereq to readme
+- [X] Update references to Service Account and check for permissions - reference the 00 notebooks new section for correct setup
+- [X] Hyperlinks to prediction notebook in each of 03a-03f
+- [X] export model: GCS and Vertex AI Model Registry use series_experiment naming convention and storage locations
+- [X] fix references to data in GCS in the Tools - Predictions notebook: bucket/series/experiment
+- [ ] Add Experiment tracking
+- [ ] update pipeline examples
+    - [ ] New version of pipeline 1 that uses experiment tracking - call it 1b
+    - [X] update pipeline 2 - same flow but updated to match the series
+    - [ ] create pipeline 3
+- [ ] add kmeans, pca, autoencoder for anomaly detection using fraud data (maybe in applied section)
