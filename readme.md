@@ -10,9 +10,21 @@ I want to share and enable [Vertex AI](https://cloud.google.com/vertex-ai/docs/s
    </a>
 </p>
 <p align="center">Click to watch on YouTube</p>
-<p align="center">Click <a href="https://youtube.com/playlist?list=PLgxF613RsGoUuEjJJxJW2JYyZ8g1qOUou" target="_blank" rel="noopener noreferrer">here</a> to see full playlist for this repository</p>
+<p align="center">Click <a href="https://youtube.com/playlist?list=PLgxF613RsGoUuEjJJxJW2JYyZ8g1qOUou" target="_blank" rel="noopener noreferrer">here</a> to see current playlist for this repository</p>
 
 ---
+## Table of Contents
+- [Considerations](#considerations)
+- [Overview](#overview)
+- [Vertex AI](#vertex)
+- [Interacting With Vertex AI](#vertexsdk)
+- [Setup](#setup)
+- [Helpful Sections](#helpful)
+- [More Resources](#resources)
+
+
+---
+<a id = 'considerations'></a>
 ## Considerations
 
 ### Data Type
@@ -40,6 +52,7 @@ I want to share and enable [Vertex AI](https://cloud.google.com/vertex-ai/docs/s
 -  More!
 
 ---
+<a id = 'overview'></a>
 ## Overview
 
 This is a series of workflow demonstrations that use the same data source to build and deploy the same machine learning model with different frameworks and automation.  These are meant to help get started in understanding and learning Vertex AI and provide starting points for new projects.  
@@ -62,7 +75,16 @@ This work focuses on cases where you have training data:
 :---:|:---:|:---:|:---:
 ![](./architectures/overview/02_overview.png)|![](./architectures/overview/03_overview.png)|![](./architectures/overview/05_overview.png)|![](./architectures/overview/forecasting_overview.png)
 
+### Vertex AI For ML Training
+
+<p align="center" width="100%">
+    <img src="./architectures/overview/training.png" width="45%">
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <img src="./architectures/overview/training2.png" width="45%">
+</p>
+
 ---
+<a id = 'vertex'></a>
 ## Vetex AI
 
 Vetex AI is a platform for end-to-end model development.  It consist of core components that make the processes of MLOps possible for design patterns of all types.
@@ -74,6 +96,7 @@ Vetex AI is a platform for end-to-end model development.  It consist of core com
 </p>
 
 ---
+<a id = 'vertexsdk'></a>
 ## Interacting with Vertex AI
 Many Vertex AI resources can be viewed and monitored directly in the [GCP Console](https://console.cloud.google.com/vertex-ai).  Vertex AI resources are primarily created, and modified with the [Vertex AI API](https://cloud.google.com/vertex-ai/docs/reference).  
 
@@ -108,6 +131,7 @@ model_list = aiplatform.Model.list()
 ```
 
 ---
+<a id = 'setup'></a>
 ## Setup
 
 The demonstrations are presented in a series of JupyterLab notebooks. These can be reviewed directly in [this repository on GitHub](https://github.com/statmike/vertex-ai-mlops) or cloned to your Jupyter instance on [Vertex AI Workbench](https://cloud.google.com/vertex-ai/docs/workbench/notebook-solution).
@@ -160,14 +184,17 @@ Resources on these items:
 - [Open Notebooks](https://cloud.google.com/notebooks/docs/create-new#open_the_notebook_2)
 
 ---
-# Helpful Sections
+<a id = 'helpful'></a>
+## Helpful Sections
 - [Learning Machine Learning](./Learn%20ML/readme.md)
     - I often get asked "How do I learn about ML?".  There are lots of good answers. ....
 - [Explorations](./Explorations/readme.md)
     - This is a series of projects for exploring new, new-to-me, and emerging tools in the ML world!
 - [Tips](./Tips/readme.md)
-    - Tips for using the repository and notebooks with examples of core skills like building containers, parameterizing jobs and interacting with other GCP services.
+    - Tips for using the repository and notebooks with examples of core skills like building containers, parameterizing jobs and interacting with other GCP services. These tips help with scaling jobs and developing them with a focus on CI/CD.
+
 ---
+<a id = 'resources'></a>
 ## More Resources Like This Repository
 
 This is my personal repository of demonstrations I use for learning and sharing Vertex AI.  There are many more resources available.  Within each notebook I have included a resources section and a related training section. 
@@ -176,86 +203,3 @@ This is my personal repository of demonstrations I use for learning and sharing 
 - GitHub [GoogleCloudPlatform/mlops-with-vertex-ai](https://github.com/GoogleCloudPlatform/mlops-with-vertex-ai)
 - [Overview of Data Science on Google Cloud](https://cloud.google.com/data-science)
 
----
-## Vertex AI For ML Training
-
-Add these:
- - tensorboard
- - experiment
- - worker pool
-
-```mermaid
-sequenceDiagram
-   actor User
-   participant Training Code
-   participant API
-   participant Training Job
-   Participant Custom Job
-   Participant Hyperparameter Tuning Job
-   Note over Training Job, Hyperparameter Tuning Job: Vertex AI Training
-
-   rect rgb(154, 160, 166)
-      note right of User: Vertex AI Workbench / Notebook
-      Training Code ->> Training Code: Inside
-   end
-   rect rgb(234, 67, 53)
-      note right of User: Python Script
-      rect rgb(66, 133, 244)
-         note right of Training Code: a
-         Training Code ->> API: customJob = aiplatform.CustomJob.from_local_script()
-         API ->> Custom Job: customJob.run()
-      end
-      rect rgb(251, 188, 4)
-         note right of Training Code: d
-         Training Code ->> API: trainingJob = aiplatform.CustomTrainingJob()
-         API ->> Training Job: model = trainingJob.run()
-         Training Job -->> Custom Job: creates backing custom job
-      end
-      rect rgb(52, 168, 83)
-         note right of Training Code: g
-         Training Code ->> API: customJob = aiplatform.CustomJob.from_local_script()
-         Training Code ->> API: tuningJob = aiplatform.HyperparameterTuningJob(customJob)
-         API ->> Hyperparameter Tuning Job: tuningJob.run()
-      end
-   end
-   rect rgb(234, 67, 53)
-      note right of User: Python Source Distribution
-      rect rgb(66, 133, 244)
-         note right of Training Code: b
-         Training Code ->> API: customJob = aiplatform.CustomJob()
-         API ->> Custom Job: customJob.run()
-      end
-      rect rgb(251, 188, 4)
-         note right of Training Code: e
-         Training Code ->> API: trainingJob = aiplatform.CustomPythonPackageTrainingJob()
-         API ->> Training Job: model = trainingJob.run()
-         Training Job -->> Custom Job: creates backing custom job
-      end
-      rect rgb(52, 168, 83)
-         note right of Training Code: h
-         Training Code ->> API: customJob = aiplatform.CustomJob
-         Training Code ->> API: tuningJob = aiplatform.HyperparameterTuningJob(customJob)
-         API ->> Hyperparameter Tuning Job: tuningJob.run()
-      end
-   end
-   rect rgb(234, 67, 53)
-      note right of User: Custom Container
-      rect rgb(66, 133, 244)
-         note right of Training Code: c
-         Training Code ->> API: customJob = aiplatform.CustomJob()
-         API ->> Custom Job: customJob.run()
-      end
-      rect rgb(251, 188, 4)
-         note right of Training Code: f
-         Training Code ->> API: trainingJob = aiplatform.CustomContainerTrainingJob()
-         API ->> Training Job: model = trainingJob.run()
-         Training Job -->> Custom Job: creates backing custom job
-      end
-      rect rgb(52, 168, 83)
-         note right of Training Code: i
-         Training Code ->> API: customJob = aiplatform.CustomJob()
-         Training Code ->> API: tuningJob = aiplatform.HyperparameterTuningJob(customJob)
-         API ->> Hyperparameter Tuning Job: tuningJob.run()
-      end
-   end
-```
